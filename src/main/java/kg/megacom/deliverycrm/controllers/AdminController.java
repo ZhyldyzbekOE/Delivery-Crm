@@ -28,5 +28,4 @@ public class AdminController {
         }
         return "redirect:/index";
     }
-
 }

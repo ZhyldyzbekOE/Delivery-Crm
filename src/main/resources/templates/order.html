@@ -5,6 +5,9 @@
     <title>Заказы</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        .btnSearchCss{
+            margin-left: 650px;
+        }
         .block
         {
             margin-left: 120px;
@@ -18,12 +21,37 @@
             color: #ffac30;
         }
 
+        .btnSearch{
+            position: absolute;
+            /*top: 12;*/
+            width: 42px;
+            height: 29.5px;
+            border-radius: 0 6px 6px 0;
+            cursor: pointer;
+            color: #ffac30;
+            background-color: #ffac30;
+            margin-top: 30px;
+        }
+        table{
+            margin-top: 35px;
+        }
+        .inputSearch{
+            margin-top: 30px;
+        }
+
     </style>
 </head>
 
 <body>
     <div class="block">
         <h3 class="textBloc" align="center">MEGALANIA</h3>
+    </div>
+
+    <div class="btnSearchCss">
+        <form class="searchInput">
+            <input class="inputSearch" type="text" placeholder="Искать здесь...">
+            <button type="submit" class="btnSearch"></button>
+        </form>
     </div>
 
     <div class="container">
@@ -56,7 +84,6 @@
                         <td>Жылдызбек</td>
                         <td>Окей</td>
                     </tr>
-
                 </tbody>
 
             </table>
