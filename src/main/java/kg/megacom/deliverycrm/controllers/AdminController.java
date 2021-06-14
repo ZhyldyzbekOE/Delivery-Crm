@@ -24,7 +24,7 @@ public class AdminController {
     @PostMapping("/admin")
     public String adminIn(@ModelAttribute("admin") Admin admin){
         if (adminDAO.checkLoginAndPasswordAdmin(admin)){
-            return "test";
+            return "order";
         }
         return "redirect:/index";
     }
