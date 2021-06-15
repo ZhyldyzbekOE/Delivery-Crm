@@ -14,13 +14,7 @@ public class AdminDAO {
     @Autowired
     private AdminRepository adminRepository;
 
-//    public ArrayList<Admin> adminArrayList = new ArrayList<>();
-//    {
-//        adminArrayList.add(new Admin("zheka@gmail.com", "123"));
-//    }
-
     public boolean checkLoginAndPasswordAdmin(Admin admin){
-
         List<Admin> adminArrayList = adminRepository.findAll(); // это select для бд
 
         for (Admin item : adminArrayList) {
@@ -30,5 +24,11 @@ public class AdminDAO {
             }
         }
         return false;
+    }
+
+    public void saveNewAdmin(Admin admin) {
+
+        adminRepository.saveAndFlush(admin);
+
     }
 }

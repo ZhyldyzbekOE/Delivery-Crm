@@ -1,5 +1,9 @@
 package kg.megacom.deliverycrm.models;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "admins ")
@@ -8,11 +12,24 @@ public class Admin {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+    @NotEmpty
+    @Pattern(regexp = "[а-яА-Я]*" , message = "Введите на кириллице")
+    private String firstName;
+    @NotEmpty
+    @Pattern(regexp = "[а-яА-Я]*" , message = "Введите на кириллице")
+    private String lastName;
+    @NotEmpty
     private String login;
+
+    @Size(min = 5)
+    @Pattern(regexp = "[a-zA-Z0-9]*")
+    @NotEmpty
     private String password;
 
 
-    public Admin(String login, String password) {
+    public Admin(String firstName, String lastName, String login, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.login = login;
         this.password = password;
     }
@@ -49,5 +66,21 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }
