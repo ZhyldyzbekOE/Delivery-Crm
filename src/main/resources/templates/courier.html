@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btnSearchCss {
+            width: 100%;
+            height: 50px;
+        }
+
+        .block {
+            background-color: #323232;
+            height: 100px;
+            width: 100%;
+        }
+
+        .textBloc {
+            font-size: 3rem;
+            padding-top: 15px;
+            color: #ffac30;
+        }
+
+        .btnSearch {
+            position: absolute;
+            /*top: 12;*/
+            width: 42px;
+            height: 29.5px;
+            border-radius: 0 6px 6px 0;
+            cursor: pointer;
+            color: #ffac30;
+            background-color: #ffac30;
+            margin-top: 30px;
+        }
+
+        .searchInput {
+            float: right;
+            margin-right: 100px;
+        }
+
+        table {
+            margin-top: 35px;
+        }
+
+        .inputSearch {
+            margin-top: 30px;
+        }
+
+
+        /*   Cтили для кнопки заказать и окно заказа -START-*/
+
+        .addOrder {
+            position: relative;
+            float: left;
+            margin-left: 20px;
+            margin-top: 12px;
+
+        }
+
+        .addOrder img {
+            width: 50px;
+        }
+
+        .addOrder img:hover {
+            width: 57px;
+            transition: 1s;
+        }
+
+        .addnew {
+            margin: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+            padding-left: 20px;
+            padding-right: 20px;
+
+        }
+
+
+        .orderWindow {
+            position: absolute;
+            width: 600px;
+            height: 300px;
+            background-color: white;
+            border-radius: 10px;
+            left: 80px;
+            top: 160px;
+            border: #2f3031 solid 2px;
+            display: none;
+
+        }
+
+        .winTitle {
+            width: 100%;
+            height: 50px;
+            color: #ffac30;
+            background-color: #323232;
+            border-radius: 6px;
+        }
+
+        .winTitle h2 {
+            text-align: center;
+            font-size: 25px;
+            padding-top: 7px;
+
+        }
+
+        .winTitle h3 {
+            font-size: 56px;
+        }
+
+
+        .winTitle button {
+            position: absolute;
+            float: right;
+            left: 565px;
+            top: 16px;
+            background: #1b8c66;
+            color: white;
+            font-size: 10px;
+        }
+
+        .centers {
+            margin: 0 auto;
+        }
+
+       </style>
+</head>
+
+<body>
+<div class="block">
+    <h3 class="textBloc" align="center">MEGALANIA</h3>
+</div>
+
+<div class="btnSearchCss">
+    <div class="addOrder">
+        <img src="data:image/png;base64,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" align="center" alt="" title="Добавить новый заказ" onclick="showAddNewWin()">
+    </div>
+    <form class="searchInput">
+        <input class="inputSearch" type="text" placeholder="Искать здесь...">
+        <button type="submit" class="btnSearch"></button>
+    </form>
+</div>
+                <h2>Курьеры</h2>
+
+                    <div class="container">
+
+                        <table border = "3" class="table table-bordered">
+
+                            <thead class="table-dark">
+
+
+                    <thead>
+                    <tr>
+                        <th>Фио</th>
+                        <th>Телефон</th>
+                        <th>Статус</th>
+                        <th>Изменить</th>
+                        <th>Удалить</th>
+                    </tr>
+                    </thead>
+                            <tr>
+                                <td>Жылдызбек</td>
+                                <td>0704655333</td>
+                                <td>Свободен</td>
+                                <td>Изменить</td>
+                                <td>Удалить</td>
+                            </tr>
+                    <tbody>
+
+                    <tr th:each="courier : ${users}">
+                        <td th:text="${user.name}"><br></td>
+                        <td th:text="${user.password}"><br></td>
+                        <td th:text="${user.email}"><br></td>
+
+
+                        <td><a th:href="@{/edit/{id}(id=${user.id})}"><button type="button" class="btn btn-primary">Edit</button></a></td>
+                        <td><a th:href="@{/delete/{id}(id=${user.id})}"><button type="button" class="btn btn-primary">Delete</button></a></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p align="center"><a href="/signup"><input type="submit" value="Add a new User" class="btn btn-primary" style="width:150px"></a><p/>
+        </div>
+    </div>
+
+</head>
+    </div>
+<body>
+
+</body>
+</body>
+</html>

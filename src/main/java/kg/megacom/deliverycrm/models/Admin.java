@@ -2,7 +2,7 @@ package kg.megacom.deliverycrm.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "admins ")
+@Table(name = "admins")
 public class Admin {
 
     @Id
