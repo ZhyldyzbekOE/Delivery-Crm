@@ -34,6 +34,14 @@ public class Admin {
         this.password = password;
     }
 
+    public Admin(Long id, String firstName, String lastName, String login, String password) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.login = login;
+        this.password = password;
+    }
+
     public Admin() { }
 
     @Override

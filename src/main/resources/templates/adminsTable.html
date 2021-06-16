@@ -88,7 +88,18 @@
         </thead>
 
         <tbody>
+            <tr th:each="admin : ${admins}">
 
+                <td th:text="${admin.getId()}"></td>
+                <td th:text="${admin.getFirstName()}"></td>
+                <td th:text="${admin.getLastName()}"></td>
+                <td th:text="${admin.getLogin()}"></td>
+
+                <td> <a th:href="@{/editAdmin/{id}/edit(id=${admin.getId()})}"> <button type="button" class="btn btn-primary">Изменить</button></a> </td>
+
+                <td> <a th:href="@{/deleteAdmin/{id}(id=${admin.getId()})}"><button type="button" class="btn btn-primary">Удалить</button></a> </td>
+
+            </tr>
         </tbody>
     </table>
 </div>

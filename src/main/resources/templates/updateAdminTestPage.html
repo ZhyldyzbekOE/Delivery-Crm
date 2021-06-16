@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--<h1>Успешно</h1>-->
+<form th:method="POST" th:action="@{/updateAdmin/{id}(id=${admin.getId()})}" th:object="${admin}">
+
+    <label for="firstName" style="color : black">Введите имя: </label>
+    <input type="text"  th:field="*{firstName}" id="firstName"/>
+
+    <label for="lastName" style="color : black">Введите фамилию: </label>
+    <input type="text"  th:field="*{lastName}" id="lastName"/>
+
+    <label for="login" style="color : black">Enter логин: </label>
+    <input type="text"  th:field="*{login}" id="login"/>
+
+    <label for="password" style="color : black">Enter пароль: </label>
+    <input type="text"  th:field="*{password}" id="password"/>
+
+    <input type="submit" value="Update!"/>
+
+</form>
+
+</body>
+</html>
