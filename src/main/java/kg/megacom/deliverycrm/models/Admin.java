@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 public class Admin {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     @NotEmpty
     @Pattern(regexp = "[а-яА-Я]*" , message = "Введите на кириллице")

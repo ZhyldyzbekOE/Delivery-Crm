@@ -11,15 +11,19 @@
 
     <label for="firstName" style="color : black">Введите имя: </label>
     <input type="text"  th:field="*{firstName}" id="firstName"/>
+    <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">name error</div>
 
     <label for="lastName" style="color : black">Введите фамилию: </label>
     <input type="text"  th:field="*{lastName}" id="lastName"/>
+    <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">fam error</div>
 
     <label for="login" style="color : black">Enter логин: </label>
-    <input type="text"  th:field="*{login}" id="login"/>
+    <input type="email"  th:field="*{login}" id="login"/>
 
     <label for="password" style="color : black">Enter пароль: </label>
     <input type="text"  th:field="*{password}" id="password"/>
+    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">login error</div>
+
 
     <input type="submit" value="Update!"/>
 

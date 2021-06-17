@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+
+    .block {
+      background-color: #323232;
+      height: 100px;
+      width: 100%;
+    }
+
+    .textBloc {
+      font-size: 3rem;
+      padding-top: 15px;
+      color: #ffac30;
+    }
+
+    .btnSearch {
+      position: absolute;
+      /*top: 12;*/
+      width: 42px;
+      height: 29.5px;
+      border-radius: 0 6px 6px 0;
+      cursor: pointer;
+      color: #ffac30;
+      background-color: #ffac30;
+      margin-top: 30px;
+    }
+
+    .searchInput {
+      float: right;
+      margin-right: 100px;
+    }
+
+    table {
+      margin-top: 35px;
+    }
+
+    .inputSearch {
+      margin-top: 30px;
+    }
+
+
+    /*   Cтили для кнопки заказать и окно заказа -START-*/
+
+    .addOrder img {
+      width: 50px;
+    }
+
+    .btnSearchCss {
+        width: 61%;
+        height: 50px;
+    }
+
+    .addOrder img:hover {
+      width: 57px;
+      transition: 1s;
+    }
+
+    .winTitle h2 {
+      text-align: center;
+      font-size: 25px;
+      padding-top: 7px;
+
+    }
+
+    .winTitle h3 {
+      font-size: 56px;
+    }
+
+
+    .winTitle button {
+      position: absolute;
+      float: right;
+      left: 565px;
+      top: 16px;
+      background: #1b8c66;
+      color: white;
+      font-size: 10px;
+    }
+
+
+  </style>
+</head>
+
+<body>
+    <div class="block">
+      <h3 class="textBloc" align="center">MEGALANIA</h3>
+    </div>
+
+<div class="btnSearchCss">
+      <form class="searchInput">
+        <input class="inputSearch" type="text" placeholder="Искать здесь...">
+        <button type="submit" class="btnSearch"></button>
+      </form>
+</div>
+
+<div class="container">
+
+  <table border = "3" class="table table-bordered">
+
+    <thead class="table-dark">
+        <tr>
+          <th>Фио</th>
+          <th>Телефон</th>
+          <th>Статус</th>
+          <th>Изменить</th>
+          <th>Удалить</th>
+        </tr>
+    </thead>
+
+    <tbody>
+            <tr th:each="courier : ${users}">
+                <td th:text="${user.name}"><br></td>
+                <td th:text="${user.password}"><br></td>
+                <td th:text="${user.email}"><br></td>
+                <td><a th:href="@{/edit/{id}(id=${user.id})}"><button type="button" class="btn btn-primary">Edit</button></a></td>
+                <td><a th:href="@{/delete/{id}(id=${user.id})}"><button type="button" class="btn btn-primary">Delete</button></a></td>
+            </tr>
+    </tbody>
+
+  </table>
+
+    </div>
+
+</body>
+</html>

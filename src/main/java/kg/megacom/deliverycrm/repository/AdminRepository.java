@@ -21,5 +21,4 @@ public interface AdminRepository extends JpaRepository<Admin, Long> {
     void update(@Param("id") Long id, @Param("name") String name, @Param("fam") String fam,
                 @Param("login") String login, @Param("password") String password);
 
-
 }

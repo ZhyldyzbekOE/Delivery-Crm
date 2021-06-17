@@ -70,9 +70,7 @@ public class AdminController {
         if (bindingResult.hasErrors()){
             return "updateAdminTestPage";
         }
-
         adminDAO.update(id, admin);
         return "redirect:/adminTable";
     }
-
 }
