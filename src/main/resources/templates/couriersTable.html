@@ -4,86 +4,130 @@
   <meta charset="UTF-8">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
+    <style>
+        .btnSearchCss {
+            width: 61%;
+            height: 50px;
+        }
 
-    .block {
-      background-color: #323232;
-      height: 100px;
-      width: 100%;
-    }
+        .block {
+            background-color: #323232;
+            height: 100px;
+            width: 100%;
+        }
 
-    .textBloc {
-      font-size: 3rem;
-      padding-top: 15px;
-      color: #ffac30;
-    }
+        .textBloc {
+            font-size: 3rem;
+            padding-top: 15px;
+            color: #ffac30;
+        }
 
-    .btnSearch {
-      position: absolute;
-      /*top: 12;*/
-      width: 42px;
-      height: 29.5px;
-      border-radius: 0 6px 6px 0;
-      cursor: pointer;
-      color: #ffac30;
-      background-color: #ffac30;
-      margin-top: 30px;
-    }
+        .btnSearch {
+            position: absolute;
+            /*top: 12;*/
+            width: 42px;
+            height: 29.5px;
+            border-radius: 0 6px 6px 0;
+            cursor: pointer;
+            color: #ffac30;
+            background-color: #ffac30;
+            margin-top: 30px;
+        }
 
-    .searchInput {
-      float: right;
-      margin-right: 100px;
-    }
+        .searchInput {
+            float: right;
+            margin-right: 100px;
+        }
 
-    table {
-      margin-top: 35px;
-    }
+        table {
+            margin-top: 35px;
+        }
 
-    .inputSearch {
-      margin-top: 30px;
-    }
-
-
-    /*   Cтили для кнопки заказать и окно заказа -START-*/
-
-    .addOrder img {
-      width: 50px;
-    }
-
-    .btnSearchCss {
-        width: 61%;
-        height: 50px;
-    }
-
-    .addOrder img:hover {
-      width: 57px;
-      transition: 1s;
-    }
-
-    .winTitle h2 {
-      text-align: center;
-      font-size: 25px;
-      padding-top: 7px;
-
-    }
-
-    .winTitle h3 {
-      font-size: 56px;
-    }
+        .inputSearch {
+            margin-top: 30px;
+        }
 
 
-    .winTitle button {
-      position: absolute;
-      float: right;
-      left: 565px;
-      top: 16px;
-      background: #1b8c66;
-      color: white;
-      font-size: 10px;
-    }
+        /*   Cтили для кнопки заказать и окно заказа -START-*/
+
+        .addOrder {
+            position: relative;
+            float: left;
+            margin-left: 20px;
+            margin-top: 12px;
+
+        }
+
+        .addOrder img {
+            width: 70px;
+            height: 80px;
+        }
+
+        .addOrder img:hover {
+            width: 57px;
+            transition: 1s;
+        }
+
+        .addnew {
+            margin: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+            padding-left: 20px;
+            padding-right: 20px;
+
+        }
 
 
-  </style>
+        .orderWindow {
+            position: absolute;
+            width: 600px;
+            height: 550px;
+            background-color: white;
+            border-radius: 10px;
+            left: 80px;
+            top: 160px;
+            border: #2f3031 solid 2px;
+            display: none;
+
+        }
+
+        .winTitle {
+            width: 100%;
+            height: 50px;
+            color: #ffac30;
+            background-color: #323232;
+            border-radius: 6px;
+        }
+
+        .winTitle h2 {
+            text-align: center;
+            font-size: 25px;
+            padding-top: 7px;
+
+        }
+
+        .winTitle h3 {
+            font-size: 56px;
+        }
+
+        .winTitle button {
+            position: absolute;
+            float: right;
+            left: 565px;
+            top: 16px;
+            background: #1b8c66;
+            color: white;
+            font-size: 10px;
+        }
+
+        .centers {
+            margin: 0 auto;
+        }
+
+        /*   Cтили для кнопки заказать и окно заказа -END-*/
+    </style>
+
 </head>
 
 <body>
@@ -92,10 +136,16 @@
     </div>
 
 <div class="btnSearchCss">
+
+    <div class="addOrder" >
+        <img src="https://freepikpsd.com/media/2019/10/orders-icon-png-1-Transparent-Images.png" alt="" title="Оформить заказ" onclick="showAddNewWin()">
+    </div>
+
       <form class="searchInput">
         <input class="inputSearch" type="text" placeholder="Искать здесь...">
         <button type="submit" class="btnSearch"></button>
       </form>
+
 </div>
 
 <div class="container">
@@ -104,7 +154,8 @@
 
     <thead class="table-dark">
         <tr>
-          <th>Фио</th>
+          <th>Имя</th>
+          <th>Фамилия</th>
           <th>Телефон</th>
           <th>Статус</th>
           <th>Изменить</th>
@@ -113,18 +164,65 @@
     </thead>
 
     <tbody>
-            <tr th:each="courier : ${users}">
-                <td th:text="${user.name}"><br></td>
-                <td th:text="${user.password}"><br></td>
-                <td th:text="${user.email}"><br></td>
-                <td><a th:href="@{/edit/{id}(id=${user.id})}"><button type="button" class="btn btn-primary">Edit</button></a></td>
-                <td><a th:href="@{/delete/{id}(id=${user.id})}"><button type="button" class="btn btn-primary">Delete</button></a></td>
+            <tr th:each="courier : ${couriers}">
+                <td th:text="${courier.getFirstName()}"><br></td>
+                <td th:text="${courier.getLastName()}"><br></td>
+                <td th:text="${courier.getPhoneNumber()}"><br></td>
+                <td th:text="${courier.getCourierStatus()}"><br></td>
+                <td><a th:href="@{/edit/{id}(id=${courier.id})}"><button type="button" class="btn btn-primary">Edit</button></a></td>
+                <td><a th:href="@{/delete/{id}(id=${courier.id})}"><button type="button" class="btn btn-primary">Delete</button></a></td>
             </tr>
     </tbody>
 
   </table>
 
+    <div class="orderWindow" id="orderWin">
+        <div class="winTitle">
+            <h2>Добавить курьера</h2>
+            <button id="" onclick="closeShowAddNewWin()">Х</button>
+        </div>
+
+        <div class="col-md-10 centers">
+
+            <form method="POST" th:action="@{/createCourier}" th:object="${newCourier}">
+
+                <div class="form-group">
+                    <label for="firstName" style="font-size: 22px;">Имя</label>
+                    <input type="text" class="form-control" th:field="*{firstName}" id="firstName" placeholder="Введите Имя">
+                </div>
+
+                <div class="form-group">
+                    <label for="lsName" style="font-size: 22px;">Фамилия</label>
+                    <input type="text" class="form-control" th:field="*{lastName}" id="lsName" placeholder="Введите Фамилию">
+                </div>
+
+                <div class="form-group">
+                    <label for="number" style="font-size: 22px;">Телефон</label>
+                    <input type="text" class="form-control" th:field="*{PhoneNumber}" id="number" placeholder="Введите номер">
+                </div>
+
+                <hr>
+                <button type="button" class="btn btn-primary" style="color: white; font-size: 20px;">Отмена</button>
+                <button type="submit" class="btn btn-info" style="color: white; font-size: 20px;">Сохранить</button>
+            </form>
+        </div>
     </div>
+
+
+    </div>
+
+    <button><a href="/getOrderTable" type="button" class="btn btn-primary">Cancel</a></button>
+
+
+    <script>
+        function showAddNewWin() {
+            var win = document.getElementById("orderWin").style.display = 'inline';
+        }
+
+        function closeShowAddNewWin() {
+            var win = document.getElementById("orderWin").style.display = 'none';
+        }
+    </script>
 
 </body>
 </html>

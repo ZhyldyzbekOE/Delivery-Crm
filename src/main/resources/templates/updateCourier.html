@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<form th:method="POST" th:action="@{/updateCourier/{id}(id=${courier.getId()})}" th:object="${courier}">
+
+  <label for="firstName" style="color : black">Введите имя: </label>
+  <input type="text"  th:field="*{firstName}" id="firstName"/>
+  <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName error</div>
+
+  <label for="lastName" style="color : black">Введите фамилию: </label>
+  <input type="text"  th:field="*{lastName}" id="lastName"/>
+  <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName error</div>
+
+  <label for="phoneNumber" style="color : black">Введите телефон: </label>
+  <input type="text"  th:field="*{PhoneNumber}" id="phoneNumber"/>
+  <div style="color:red" th:if="${#fields.hasErrors('PhoneNumber')}" th:errors="*{PhoneNumber}">phoneNumber error</div>
+  <br>
+
+  <select class="form-control" id="courierStatus" th:field="*{courierStatus}">
+    <option th:each="courierStatus : ${T(kg.megacom.deliverycrm.enums.CouriersStatus).values()}"
+            th:value="${courierStatus}"
+            th:text="${courierStatus}"></option>
+  </select>
+
+
+  <input type="submit" value="Update!"/>
+
+</body>
+</form>
+</html>

@@ -12,7 +12,8 @@ public class Courier {
     private Long id;
     private String firstName;
     private String lastName;
-    private int PhoneNumber;
+    private int  PhoneNumber;
+    @Enumerated(EnumType.STRING)
     private CouriersStatus courierStatus;
 
     public Courier() {
