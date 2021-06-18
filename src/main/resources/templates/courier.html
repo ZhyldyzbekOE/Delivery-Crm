@@ -5,6 +5,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+
         .btnSearchCss {
             width: 100%;
             height: 50px;
@@ -81,7 +82,7 @@
         .orderWindow {
             position: absolute;
             width: 600px;
-            height: 300px;
+            height: 400px;
             background-color: white;
             border-radius: 10px;
             left: 80px;
@@ -160,6 +161,7 @@
                         <th>Удалить</th>
                     </tr>
                     </thead>
+                            <tbody>
                             <tr>
                                 <td>Жылдызбек</td>
                                 <td>0704655333</td>
@@ -167,20 +169,50 @@
                                 <td>Изменить</td>
                                 <td>Удалить</td>
                             </tr>
-                    <tbody>
 
-                    <tr th:each="courier : ${users}">
-                        <td th:text="${user.name}"><br></td>
-                        <td th:text="${user.password}"><br></td>
-                        <td th:text="${user.email}"><br></td>
-
-
-                        <td><a th:href="@{/edit/{id}(id=${user.id})}"><button type="button" class="btn btn-primary">Edit</button></a></td>
-                        <td><a th:href="@{/delete/{id}(id=${user.id})}"><button type="button" class="btn btn-primary">Delete</button></a></td>
-
-                    </tr>
                     </tbody>
+
                 </table>
+
+                        <div class="orderWindow" id="orderWin">
+                            <div class="winTitle">
+                                <h2>Добавить Курьера</h2>
+                                <button id="" onclick="closeShowAddNewWin()">Х</button>
+                            </div>
+
+                            <div class="col-md-10 centers">
+
+                                <form method="POST"  th:action="@{/create-courier}" th:object="${courier}">
+                                    <div class="form-group">
+                                        <label for="firstName" style="font-size: 22px;">Имя</label>
+                                        <input type="text" class="form-control" th:field="*{firstName}" id="firstName" placeholder="Введите Имя">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastName" style="font-size: 22px;">Фамилия</label>
+                                        <input type="text" class="form-control" th:field="*{lastName}" id="lastName" placeholder="Введите Фамилию">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phoneNumber" style="font-size: 22px;">Телефон</label>
+                                        <input type="text" class="form-control" th:field="*{phoneNumber}" id="phoneNumber"
+                                               placeholder="Введите телефон">
+                                    </div>
+                                    <hr>
+                                    <button type="button" class="btn btn-primary" style="color: white; font-size: 20px;">Отмена</button>
+                                    <button type="submit" class="btn btn-info" style="color: white; font-size: 20px;">Сохранить</button>
+                                </form>
+                            </div>
+                        </div>
+                        <script>
+
+        function showAddNewWin() {
+            var win = document.getElementById("orderWin").style.display = 'inline';
+        }
+
+        function closeShowAddNewWin() {
+            var win = document.getElementById("orderWin").style.display = 'none';
+        }
+
+    </script>
             </div>
             <p align="center"><a href="/signup"><input type="submit" value="Add a new User" class="btn btn-primary" style="width:150px"></a><p/>
         </div>
@@ -193,3 +225,6 @@
 </body>
 </body>
 </html>
+
+
+
