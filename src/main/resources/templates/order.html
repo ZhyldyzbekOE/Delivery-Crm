@@ -138,7 +138,7 @@
 <div class="btnSearchCss">
 
     <div class="addOrder" >
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgbPuX3JzLZctbLKtBIuMobyEZvjkx6eEywEdtEqw39Qqoszkv8yxfmTizdjBoBXv-P5c&usqp=CAU" alt="" title="Добавить нового администратора" onclick="showAddNewWin()">
+        <img src="https://freepikpsd.com/media/2019/10/orders-icon-png-1-Transparent-Images.png" alt="" title="Оформить заказ" onclick="showAddNewWin()">
     </div>
 
     <form class="searchInput">
@@ -185,38 +185,22 @@
 
     <div class="orderWindow" id="orderWin">
         <div class="winTitle">
-            <h2>Добавить нового администратора</h2>
+            <h2>Оформить новый заказ</h2>
             <button id="" onclick="closeShowAddNewWin()">Х</button>
         </div>
 
         <div class="col-md-10 centers">
 
-            <form th:method="POST" th:action="@{/createAdmin}" th:object="${newAdmin}">
-
+            <form method="POST">
                 <div class="form-group">
-                    <label for="firstName" style="font-size: 22px;">Имя</label>
-                        <input type="text" class="form-control" th:field="*{firstName}" id="firstName" placeholder="Введите Имя">
-                    <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">name error</div>
+                    <label for="formGroupExampleInput" style="font-size: 22px;">ФИО</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Введите ФИО">
                 </div>
-
                 <div class="form-group">
-                    <label for="lastName" style="font-size: 22px;">Фамилия</label>
-                    <input type="text" class="form-control" th:field="*{lastName}" id="lastName" placeholder="Введите фамилию">
-                    <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">fam error</div>
+                    <label for="formGroupExampleInput2" style="font-size: 22px;">Телефон</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput2"
+                           placeholder="Введите телефон">
                 </div>
-
-                <div class="form-group">
-                    <label for="login" style="font-size: 22px;">Логин</label>
-                    <input type="email" class="form-control" th:field="*{login}" id="login" placeholder="Введите логин">
-                </div>
-
-                <div class="form-group">
-                    <label for="password" style="font-size: 22px;">Пароль</label>
-                    <input type="password" class="form-control" th:field="*{password}" id="password"
-                           placeholder="Введите пароль">
-                    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">login error</div>
-                </div>
-
                 <hr>
                 <button type="button" class="btn btn-primary" style="color: white; font-size: 20px;">Отмена</button>
                 <button type="submit" class="btn btn-info" style="color: white; font-size: 20px;">Сохранить</button>

@@ -1,6 +1,6 @@
 package kg.megacom.deliverycrm.controllers;
 
-import kg.megacom.deliverycrm.dao.CourierDAO;
+import kg.megacom.deliverycrm.services.CourierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class CourierController {
 
     @Autowired
-    private CourierDAO courierDAO;
+    private CourierService courierService;
 
     @GetMapping("/getCourierTable")
     public String getCourierTable(){

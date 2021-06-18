@@ -56,6 +56,81 @@
 
     </style>
 
+
+    <style>
+        /*   Cтили для кнопки заказать и окно заказа -START-*/
+
+
+        .addOrder img {
+            width: 70px;
+            height: 80px;
+        }
+
+        .addOrder img:hover {
+            width: 57px;
+            transition: 1s;
+        }
+
+        .addnew {
+            margin: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+            padding-left: 20px;
+            padding-right: 20px;
+
+        }
+
+
+        .orderWindow {
+            position: absolute;
+            width: 600px;
+            height: 550px;
+            background-color: white;
+            border-radius: 10px;
+            left: 80px;
+            top: 160px;
+            border: #2f3031 solid 2px;
+            display: none;
+
+        }
+
+        .winTitle {
+            width: 100%;
+            height: 50px;
+            color: #ffac30;
+            background-color: #323232;
+            border-radius: 6px;
+        }
+
+        .winTitle h2 {
+            text-align: center;
+            font-size: 25px;
+            padding-top: 7px;
+
+        }
+
+        .winTitle h3 {
+            font-size: 56px;
+        }
+
+        .winTitle button {
+            position: absolute;
+            float: right;
+            left: 565px;
+            top: 16px;
+            background: #1b8c66;
+            color: white;
+            font-size: 10px;
+        }
+
+        .centers {
+            margin: 0 auto;
+        }
+
+        /*   Cтили для кнопки заказать и окно заказа -END-*/
+    </style>
+
 </head>
 
 <body>
@@ -65,43 +140,110 @@
 </div>
 
 
+
 <div class="btnSearchCss">
     <form class="searchInput">
         <input class="inputSearch" type="text" placeholder="Искать здесь...">
         <button type="submit" class="btnSearch"></button>
     </form>
+
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzsnP2i0Oe37kLp6FyBJPvccp_MRNUgyKG-w&usqp=CAU" width="50" onclick="showAddNewWin()" style="margin:15px;">
 </div>
 
 
 <div class="container" >
     <table border="3" class="table table-bordered">
         <thead class="table-dark">
-            <tr>
-                <th>№</th>
-                <th>Имя</th>
-                <th>Фамилия</th>
-                <th>Логин</th>
-                <th>Редактировать</th>
-                <th>Удалить</th>
-            </tr>
+        <tr>
+            <th>№</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Логин</th>
+            <th>Редактировать</th>
+            <th>Удалить</th>
+
+        </tr>
         </thead>
 
         <tbody>
-            <tr th:each="admin : ${admins}">
+        <tr th:each="admin : ${admins}">
 
-                <td th:text="${admin.getId()}"></td>
-                <td th:text="${admin.getFirstName()}"></td>
-                <td th:text="${admin.getLastName()}"></td>
-                <td th:text="${admin.getLogin()}"></td>
+            <td th:text="${admin.getId()}"></td>
+            <td th:text="${admin.getFirstName()}"></td>
+            <td th:text="${admin.getLastName()}"></td>
+            <td th:text="${admin.getLogin()}"></td>
 
-                <td> <a th:href="@{/editAdmin/{id}/edit(id=${admin.getId()})}"> <button type="button" class="btn btn-primary">Изменить</button></a> </td>
+            <td> <a th:href="@{/editAdmin/{id}/edit(id=${admin.getId()})}"> <button type="button" class="btn btn-primary" onclick="showEditModal()">Изменить</button></a> </td>
 
-                <td> <a th:href="@{/deleteAdmin/{id}(id=${admin.getId()})}"><button type="button" class="btn btn-primary">Удалить</button></a> </td>
+            <td> <a th:href="@{/deleteAdmin/{id}(id=${admin.getId()})}"><button type="button" class="btn btn-primary">Удалить</button></a> </td>
 
-            </tr>
+        </tr>
         </tbody>
     </table>
 </div>
+
+
+<div class="orderWindow" id="orderWin">
+    <div class="winTitle">
+        <h2>Добавить админа</h2>
+        <button id="" onclick="closeShowAddNewWin()">Х</button>
+    </div>
+
+    <div class="col-md-10 centers">
+
+        <form th:method="POST" th:action="@{/createAdmin}" th:object="${newAdmin}">
+
+            <div class="form-group">
+                <label for="firstName" style="font-size: 22px;">Имя</label>
+                <input type="text" class="form-control" th:field="*{firstName}" id="firstName" placeholder="Введите Имя">
+                <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">name error</div>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName" style="font-size: 22px;">Фамилия</label>
+                <input type="text" class="form-control" th:field="*{lastName}" id="lastName" placeholder="Введите фамилию">
+                <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">fam error</div>
+            </div>
+
+            <div class="form-group">
+                <label for="login" style="font-size: 22px;">Логин</label>
+                <input type="email" class="form-control" th:field="*{login}" id="login" placeholder="Введите логин">
+            </div>
+
+            <div class="form-group">
+                <label for="password" style="font-size: 22px;">Пароль</label>
+                <input type="password" class="form-control" th:field="*{password}" id="password"
+                       placeholder="Введите пароль">
+                <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">login error</div>
+            </div>
+
+            <hr>
+            <button type="button" class="btn btn-primary" style="color: white; font-size: 20px;">Отмена</button>
+            <button type="submit" class="btn btn-info" style="color: white; font-size: 20px;">Сохранить</button>
+        </form>
+
+    </div>
+</div>
+
+<button><a href="/getOrderTable" type="button" class="btn btn-primary">Cancel</a></button>
+<script>
+    function showAddNewWin() {
+        var win = document.getElementById("orderWin").style.display = 'inline';
+    }
+
+    function closeShowAddNewWin() {
+        var win = document.getElementById("orderWin").style.display = 'none';
+    }
+
+    function showEditModal() {
+        var win = document.getElementById("orderWin2").style.display = 'inline';
+
+    }
+
+    function closeEditModal() {
+        var win = document.getElementById("orderWin").style.display = 'none';
+    }
+</script>
 
 </body>
 </html>

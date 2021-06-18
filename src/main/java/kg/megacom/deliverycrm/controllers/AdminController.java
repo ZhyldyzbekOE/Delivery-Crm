@@ -1,6 +1,6 @@
 package kg.megacom.deliverycrm.controllers;
 
-import kg.megacom.deliverycrm.dao.AdminDAO;
+import kg.megacom.deliverycrm.services.AdminService;
 import kg.megacom.deliverycrm.models.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class AdminController {
 
     @Autowired
-    private AdminDAO adminDAO;
+    private AdminService adminService;
 
     // отрисовка окна авторизация
     @GetMapping("/index")
@@ -29,11 +31,20 @@ public class AdminController {
     // проверка логина и пароля для входа
     @PostMapping("/admin")
     public String adminIn(@ModelAttribute("admin") Admin admin, Model model){
-        if (adminDAO.checkLoginAndPasswordAdmin(admin)){
+        if (adminService.checkLoginAndPasswordAdmin(admin)){
             model.addAttribute("newAdmin", new Admin());
+            // вот тут прежде чем вернуть order нужно вытащить из базы
+            // пока этот метод не реализован
             return "order";
         }
         return "redirect:/index";
+    }
+
+    @GetMapping("/getOrderTable")
+    public String getOrderTable(Model model){
+        // нужно в  model.addAttribute положить все orders и вывести на экран
+        // пока этот метод не реализован
+        return "order";
     }
 
     @PostMapping("/createAdmin")
@@ -41,26 +52,27 @@ public class AdminController {
         if (bindingResult.hasErrors()){
             return "order";
         }
-        adminDAO.saveNewAdmin(admin);
+        adminService.saveNewAdmin(admin);
         return "redirect:/adminTable";
     }
 
     @GetMapping("/adminTable")
     public String getAdminTable(Model model){
-        model.addAttribute("admins", adminDAO.getAllAdmins());
+        model.addAttribute("admins", adminService.getAllAdmins());
+        model.addAttribute("newAdmin", new Admin());
         return "adminsTable";
     }
 
     @GetMapping("/deleteAdmin/{id}")
     public String deleteAdminFromDb(@PathVariable("id") Long id){
-        adminDAO.deleteFromDbAdmin(id);
+        adminService.deleteFromDbAdmin(id);
         return "redirect:/adminTable";
     }
 
     @GetMapping("/editAdmin/{id}/edit")
     public String edit(@PathVariable("id") Long id, Model model){
-        System.out.println(adminDAO.getAdminByIdForEdit(id));
-        model.addAttribute("admin", adminDAO.getAdminByIdForEdit(id));
+        System.out.println(adminService.getAdminByIdForEdit(id));
+        model.addAttribute("admin", adminService.getAdminByIdForEdit(id));
         return "updateAdminTestPage";
     }
 
@@ -70,7 +82,7 @@ public class AdminController {
         if (bindingResult.hasErrors()){
             return "updateAdminTestPage";
         }
-        adminDAO.update(id, admin);
+        adminService.update(id, admin);
         return "redirect:/adminTable";
     }
 }
