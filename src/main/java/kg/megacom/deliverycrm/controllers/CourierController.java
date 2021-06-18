@@ -55,6 +55,6 @@ public class CourierController {
             return "updateCourier";
         }
         courierService.update(id, courier);
-        return "redirect:/couriersTable";
+        return "redirect:/getCourierTable";
     }
 }
