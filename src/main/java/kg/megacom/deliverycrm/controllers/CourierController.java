@@ -28,8 +28,18 @@ public class CourierController {
         return "couriersTable";
     }
 
+    @GetMapping("newCreateCourierPage")
+    public String newCourierPage(Model model){
+        model.addAttribute("courierNew", new Courier());
+        return "createNewCourier";
+    }
+
     @PostMapping("/createCourier")
-    public String newCourier(@ModelAttribute("newCourier") Courier courier){
+    public String newCourier(@ModelAttribute("courierNew") @Valid Courier courier, BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()){
+            return "createNewCourier";
+        }
         courier.setCourierStatus(CouriersStatus.Free);
         courierService.saveCourier(courier);
         return "redirect:/getCourierTable";
@@ -47,6 +57,7 @@ public class CourierController {
         model.addAttribute("courier", courierService.getCourierByIdForEdit(id));
         return "updateCourier";
     }
+
 
     @PostMapping("/updateCourier/{id}")
     public String updateCourierForm(@PathVariable("id") Long id, @ModelAttribute("courier") @Valid Courier courier,

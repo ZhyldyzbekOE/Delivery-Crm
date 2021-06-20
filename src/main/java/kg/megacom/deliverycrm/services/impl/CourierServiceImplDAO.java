@@ -37,7 +37,7 @@ public class CourierServiceImplDAO implements CourierService {
     public void update(long id, Courier courier) {
         String fName = courier.getFirstName();
         String lName = courier.getLastName();
-        int  phone = courier.getPhoneNumber();
+        String  phone = courier.getPhoneNumber();
         CouriersStatus courStat = courier.getCourierStatus();
         courierRepository.update(id, fName, lName, phone,courStat);
     }

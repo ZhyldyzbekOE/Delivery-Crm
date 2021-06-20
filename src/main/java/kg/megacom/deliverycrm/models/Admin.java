@@ -6,7 +6,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "admins ")
+@Table(name = "admins")
 public class Admin {
 
     @Id
@@ -20,7 +20,6 @@ public class Admin {
     private String lastName;
     @NotEmpty
     private String login;
-
     @Size(min = 5)
     @Pattern(regexp = "[a-zA-Z0-9]*")
     @NotEmpty

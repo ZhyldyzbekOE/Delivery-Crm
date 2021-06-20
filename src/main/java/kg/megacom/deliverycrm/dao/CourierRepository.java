@@ -15,7 +15,7 @@ public interface CourierRepository extends JpaRepository<Courier, Long> {
 
     @Transactional
     @Modifying
-    @Query("UPDATE Courier SET firstName=:fName, lastName=:lName, PhoneNumber=:phone,courierStatus=:courStat where id=:id")
+    @Query("UPDATE Courier SET firstName=:fName, lastName=:lName, phoneNumber=:phone,courierStatus=:courStat where id=:id")
     void update(@Param("id") Long id, @Param("fName") String fName, @Param("lName") String lName,
-                @Param("phone") int phone, CouriersStatus courStat);
+                @Param("phone") String phone, CouriersStatus courStat);
 }

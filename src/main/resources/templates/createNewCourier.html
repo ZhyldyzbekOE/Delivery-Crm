@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="col-md-10 centers">
+
+    <form method="POST" th:action="@{/createCourier}" th:object="${courierNew}">
+
+        <div class="form-group">
+            <label for="firstName" style="font-size: 22px;">Имя</label>
+            <input type="text" class="form-control" th:field="*{firstName}" id="firstName" placeholder="Введите Имя">
+            <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName error</div>
+        </div>
+
+        <div class="form-group">
+            <label for="lsName" style="font-size: 22px;">Фамилия</label>
+            <input type="text" class="form-control" th:field="*{lastName}" id="lsName" placeholder="Введите Фамилию">
+            <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName error</div>
+        </div>
+
+        <div class="form-group">
+            <label for="number" style="font-size: 22px;">Телефон</label>
+            <input type="text" class="form-control" th:field="*{phoneNumber}" id="number" placeholder="Введите номер">
+            <div style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">lastName error</div>
+        </div>
+
+        <hr>
+        <button><a href="/getCourierTable" type="button" class="btn btn-primary" style="color: white; font-size: 20px;" >Выход</a></button>
+<!--        <button type="button" class="btn btn-primary" style="color: white; font-size: 20px;">Отмена</button>-->
+        <button type="submit" class="btn btn-info" style="color: white; font-size: 20px;">Сохранить</button>
+    </form>
+</div>
+
+</body>
+</html>

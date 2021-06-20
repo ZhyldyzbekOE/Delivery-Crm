@@ -19,7 +19,7 @@
 
   <label for="phoneNumber" style="color : black">Введите телефон: </label>
   <input type="text"  th:field="*{PhoneNumber}" id="phoneNumber"/>
-  <div style="color:red" th:if="${#fields.hasErrors('PhoneNumber')}" th:errors="*{PhoneNumber}">phoneNumber error</div>
+  <div style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">phoneNumber error</div>
   <br>
 
   <select class="form-control" id="courierStatus" th:field="*{courierStatus}">
@@ -31,6 +31,9 @@
 
   <input type="submit" value="Update!"/>
 
-</body>
 </form>
+
+<button><a href="/getCourierTable" type="button" class="btn btn-primary">Выход</a></button>
+
+</body>
 </html>

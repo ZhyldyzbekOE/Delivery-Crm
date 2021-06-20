@@ -24,10 +24,11 @@
     <input type="text"  th:field="*{password}" id="password"/>
     <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">login error</div>
 
-
     <input type="submit" value="Update!"/>
 
 </form>
+
+<button><a href="/adminTable" type="button" class="btn btn-primary">Выход</a></button>
 
 </body>
 </html>

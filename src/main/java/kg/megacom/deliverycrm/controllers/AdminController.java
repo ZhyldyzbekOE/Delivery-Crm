@@ -44,10 +44,16 @@ public class AdminController {
         return "order";
     }
 
+    @GetMapping("/newCreateAdminPage")
+    public String newAdminPage(Model model){
+        model.addAttribute("adminNew", new Admin());
+        return "createNewAdmin";
+    }
+
     @PostMapping("/createAdmin")
-    public String createNewAdmin(@ModelAttribute("newAdmin") @Valid Admin admin, BindingResult bindingResult){
+    public String createNewAdmin(@ModelAttribute("adminNew") @Valid Admin admin, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
-            return "adminsTable";
+            return "createNewAdmin";
         }
         adminService.saveNewAdmin(admin);
         return "redirect:/adminTable";
