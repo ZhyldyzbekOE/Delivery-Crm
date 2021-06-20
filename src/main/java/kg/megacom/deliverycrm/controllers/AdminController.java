@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class AdminController {
@@ -50,7 +47,7 @@ public class AdminController {
     @PostMapping("/createAdmin")
     public String createNewAdmin(@ModelAttribute("newAdmin") @Valid Admin admin, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
-            return "order";
+            return "adminsTable";
         }
         adminService.saveNewAdmin(admin);
         return "redirect:/adminTable";
