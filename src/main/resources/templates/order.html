@@ -137,9 +137,9 @@
 
 <div class="btnSearchCss">
 
-    <div class="addOrder" >
-        <img src="https://freepikpsd.com/media/2019/10/orders-icon-png-1-Transparent-Images.png" alt="" title="Оформить заказ" onclick="showAddNewWin()">
-    </div>
+    <a href="/newCreateOrderPage">
+        <img src="https://freepikpsd.com/media/2019/10/orders-icon-png-1-Transparent-Images.png" width="50"  style="margin:15px;">
+    </a>
 
     <form class="searchInput">
         <input class="inputSearch" type="text" placeholder="Искать здесь...">
@@ -153,71 +153,42 @@
     <table border="3" class="table table-bordered">
 
         <thead class="table-dark">
-        <tr>
-            <th> <a th:href="@{/getCourierTable}">Курьер</a></th>
-            <th>Адрес доставки</th>
-            <th>Адрес отправки</th>
-            <th>Статус заказа</th>
-            <th>Сумма выкупа</th>
-            <th>Стоимость доставки</th>
-            <th>Дата заказа</th>
-            <th> <a th:href="@{/adminTable}"> Администратор</a></th>
-            <th>Комментарий к доставке</th>
-        </tr>
+            <tr>
+                <th>Имя заказа</th>
+                <th> <a th:href="@{/getCourierTable}">Курьер</a></th>
+                <th>Адрес отправки</th>
+                <th>Адрес доставки</th>
+                <th>Статус заказа</th>
+                <th>Сумма выкупа</th>
+                <th>Стоимость доставки</th>
+                <th>Дата заказа</th>
+                <th> <a th:href="@{/adminTable}"> Администратор</a></th>
+                <th>Редактировать</th>
+                <th>Удалить</th>
+            </tr>
         </thead>
 
         <tbody>
-        <tr>
-            <td>Жылдызбек</td>
-            <td>Карпинка</td>
-            <td>Асанбай</td>
-            <td>Выполнен</td>
-            <td>2000</td>
-            <td>150</td>
-            <td>14.06.2021</td>
-            <td>Жылдызбек</td>
-            <td>Окей</td>
-        </tr>
+            <tr th:each="order : ${orders}">
+
+                <td th:text="${order.getOrderName()}"></td>
+                <td th:text="${order.getCourier()}"></td>
+                <td th:text="${order.getFromAddress()}"></td>
+                <td th:text="${order.getToAddress()}"></td>
+                <td th:text="${order.getOrderStatus()}"></td>
+                <td th:text="${order.getRansomSum()}"></td>
+                <td th:text="${order.getDeliveryPrice()}"></td>
+                <td th:text="${order.getOrderDate()}"></td>
+                <td th:text="${order.getAdmin()}"></td>
+                <td> <a th:href="@{/editOrder/{id}(id = ${order.getId()})}"> <button type="button" class="btn btn-primary">Изменить</button></a> </td>
+                <td> <a th:href="@{/deleteOrder/{id}(id = ${order.getId()})}"> <button type="button" class="btn btn-primary">Удалить</button></a> </td>
+            </tr>
         </tbody>
 
     </table>
 
-
-    <div class="orderWindow" id="orderWin">
-        <div class="winTitle">
-            <h2>Оформить новый заказ</h2>
-            <button id="" onclick="closeShowAddNewWin()">Х</button>
-        </div>
-
-        <div class="col-md-10 centers">
-
-            <form method="POST">
-                <div class="form-group">
-                    <label for="formGroupExampleInput" style="font-size: 22px;">ФИО</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Введите ФИО">
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2" style="font-size: 22px;">Телефон</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput2"
-                           placeholder="Введите телефон">
-                </div>
-                <hr>
-                <button type="button" class="btn btn-primary" style="color: white; font-size: 20px;">Отмена</button>
-                <button type="submit" class="btn btn-info" style="color: white; font-size: 20px;">Сохранить</button>
-            </form>
-        </div>
-    </div>
 </div>
 
-<script>
-    function showAddNewWin() {
-        var win = document.getElementById("orderWin").style.display = 'inline';
-    }
-
-    function closeShowAddNewWin() {
-        var win = document.getElementById("orderWin").style.display = 'none';
-    }
-</script>
 </body>
 
 </html>

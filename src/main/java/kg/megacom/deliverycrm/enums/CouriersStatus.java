@@ -5,4 +5,5 @@ public enum CouriersStatus {
     OnMyWay,
     Free,
     OnHoliday
+
 }

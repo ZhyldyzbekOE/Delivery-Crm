@@ -78,12 +78,8 @@ public class Courier {
 
     @Override
     public String toString() {
-        return "Courier{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", PhoneNumber=" + phoneNumber +
-                ", courierStatus=" + courierStatus +
-                '}';
+        return  firstName + " " +
+                lastName ;
+
     }
 }

@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import javax.transaction.Transactional;
 
 @Repository
@@ -18,4 +17,6 @@ public interface CourierRepository extends JpaRepository<Courier, Long> {
     @Query("UPDATE Courier SET firstName=:fName, lastName=:lName, phoneNumber=:phone,courierStatus=:courStat where id=:id")
     void update(@Param("id") Long id, @Param("fName") String fName, @Param("lName") String lName,
                 @Param("phone") String phone, CouriersStatus courStat);
+
+    Courier findByFirstNameAndLastName(String firstName, String lastName);
 }

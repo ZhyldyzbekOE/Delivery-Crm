@@ -5,9 +5,7 @@ import kg.megacom.deliverycrm.enums.CouriersStatus;
 import kg.megacom.deliverycrm.models.Courier;
 import kg.megacom.deliverycrm.services.CourierService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -43,10 +41,30 @@ public class CourierServiceImplDAO implements CourierService {
     }
 
     @Override
-    public Courier getCourierByIdForEdit(Long id) {
+    public void updateStatus(String name, String fio) {
+        Courier courier = courierRepository.findByFirstNameAndLastName(name, fio);
+        courier.setCourierStatus(CouriersStatus.OnMyWay);
+        courierRepository.save(courier);
+    }
 
-            Optional<Courier> courierOptional = courierRepository.findById(id);
-            return courierOptional.orElse(null);
+    @Override
+    public void updateStatusCanceled(String name, String fio) {
+        Courier courier = courierRepository.findByFirstNameAndLastName(name, fio);
+        courier.setCourierStatus(CouriersStatus.Free);
+        courierRepository.save(courier);
+    }
+
+    @Override
+    public void updateStatusInProcess(String name, String fio) {
+        Courier courier = courierRepository.findByFirstNameAndLastName(name, fio);
+        courier.setCourierStatus(CouriersStatus.OnMyWay);
+        courierRepository.save(courier);
+    }
+
+    @Override
+    public Courier getCourierByIdForEdit(Long id) {
+        Optional<Courier> courierOptional = courierRepository.findById(id);
+        return courierOptional.orElse(null);
 
     }
 

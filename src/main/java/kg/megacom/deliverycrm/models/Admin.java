@@ -1,7 +1,6 @@
 package kg.megacom.deliverycrm.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -43,14 +42,6 @@ public class Admin {
 
     public Admin() { }
 
-    @Override
-    public String toString() {
-        return "Admin{" +
-                "login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
-
     public Long getId() {
         return id;
     }
@@ -89,5 +80,11 @@ public class Admin {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return  firstName + " " +
+                lastName;
     }
 }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div>
+
+        <form th:method="POST" th:action="@{/updateOrder/{id}(id = ${order.id})}" th:object="${order}">
+
+            <label for="orderName" style="color : black">Введите название заказа: </label>
+            <input type="text"  th:field="*{orderName}" id="orderName"/>
+
+            <label for="ransomSum" style="color : black">Введите цену выкупа: </label>
+            <input type="text"  th:field="*{ransomSum}" id="ransomSum"/>
+
+            <label for="deliveryPrice" style="color : black">Введите цену доставки: </label>
+            <input type="text"  th:field="*{deliveryPrice}" id="deliveryPrice"/>
+
+            <select class="form-control" id="orderStatus" th:field="*{orderStatus}">
+                <option th:each="orderStatus : ${T(kg.megacom.deliverycrm.enums.OrderStatus).values()}"
+                        th:value="${orderStatus}"
+                        th:text="${orderStatus}"></option>
+            </select>
+
+            <label for="fromAddress" style="color : black">Введите адрес отправки: </label>
+            <input type="text"  th:field="*{fromAddress.address}" id="fromAddress"/>
+
+            <label for="fromAddress.phone" style="color : black">Введите номер откуда: </label>
+            <input type="text"  th:field="*{fromAddress.phone}" id="fromAddress.phone"/>
+
+            <label for="toAddress" style="color : black">Введите адрес доставки: </label>
+            <input type="text"  th:field="*{toAddress.address}" id="toAddress"/>
+
+            <label for="toAddress.phone" style="color : black">Введите номер куда: </label>
+            <input type="text"  th:field="*{toAddress.phone}" id="toAddress.phone"/>
+
+            <label for="courier"></label><select class="form-control" id="courier" th:field="*{courier}">
+            <option th:each="courier : ${couriers}"
+                    th:value="${courier.id}"
+                    th:text="${courier.getFirstName()}"></option>
+            </select>
+
+            <select class="form-control" id="admin" th:field="*{admin}">
+                <option th:each="admin : ${admins}"
+                        th:value="${admin.id}"
+                        th:text="${admin.getFirstName()}"></option>
+            </select>
+
+            <button type="submit" class="btn btn-info" style="color: white; font-size: 20px;">Сохранить</button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>

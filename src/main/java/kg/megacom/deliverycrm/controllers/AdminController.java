@@ -2,6 +2,7 @@ package kg.megacom.deliverycrm.controllers;
 
 import kg.megacom.deliverycrm.services.AdminService;
 import kg.megacom.deliverycrm.models.Admin;
+import kg.megacom.deliverycrm.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,9 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private OrderService orderService;
+
     // отрисовка окна авторизация
     @GetMapping("/index")
     public String signIn(Model model){
@@ -29,18 +33,14 @@ public class AdminController {
     @PostMapping("/admin")
     public String adminIn(@ModelAttribute("admin") Admin admin, Model model){
         if (adminService.checkLoginAndPasswordAdmin(admin)){
-            model.addAttribute("newAdmin", new Admin());
-            // вот тут прежде чем вернуть order нужно вытащить из базы
-            // пока этот метод не реализован
-            return "order";
+            return getOrderTable(model);
         }
         return "redirect:/index";
     }
 
     @GetMapping("/getOrderTable")
     public String getOrderTable(Model model){
-        // нужно в  model.addAttribute положить все orders и вывести на экран
-        // пока этот метод не реализован
+        model.addAttribute("orders", orderService.findAllOrders());
         return "order";
     }
 
@@ -62,7 +62,6 @@ public class AdminController {
     @GetMapping("/adminTable")
     public String getAdminTable(Model model){
         model.addAttribute("admins", adminService.getAllAdmins());
-        model.addAttribute("newAdmin", new Admin());
         return "adminsTable";
     }
 
