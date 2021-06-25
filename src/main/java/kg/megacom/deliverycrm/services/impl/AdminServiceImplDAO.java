@@ -55,5 +55,4 @@ public class AdminServiceImplDAO implements AdminService {
         String password = admin.getPassword();
         adminRepository.update(id, name, fam, login, password);
     }
-
 }

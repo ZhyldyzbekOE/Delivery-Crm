@@ -13,7 +13,7 @@ public interface CourierService {
 
     void update(long id, Courier courier);
 
-    void updateStatus(String name, String fio);
+    void updateStatusOnMyWay(String name, String fio);
 
     void updateStatusCanceled(String name, String fio);
 

@@ -1,10 +1,14 @@
 package kg.megacom.deliverycrm.services.impl;
 
 import kg.megacom.deliverycrm.dao.OrderRepository;
+import kg.megacom.deliverycrm.enums.OrderStatus;
 import kg.megacom.deliverycrm.models.Order;
 import kg.megacom.deliverycrm.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +26,9 @@ public class OrderServiceImplDAO implements OrderService{
 
     @Override
     public void saveOrder(Order order) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date today = new Date();
+        order.setOrderDate(sdf.format(today.getTime()));
         orderRepository.save(order);
     }
 
@@ -53,5 +60,10 @@ public class OrderServiceImplDAO implements OrderService{
     @Override
     public void deleteOrder(Long id) {
         orderRepository.deleteById(id);
+    }
+
+    @Override
+    public void changeOrderStatusOnWaiting(Order order) {
+        order.setOrderStatus(OrderStatus.IN_WAITING);
     }
 }

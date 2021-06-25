@@ -3,6 +3,10 @@ package kg.megacom.deliverycrm.models;
 import kg.megacom.deliverycrm.enums.OrderStatus;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
 import java.util.Date;
 
 @Entity
@@ -13,6 +17,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
+    @Pattern(regexp = "[а-яА-Яa-zA-Z]*")
     private String orderName;
 
     @ManyToOne
@@ -23,8 +29,12 @@ public class Order {
     @JoinColumn(name = "admin_id")
     private Admin admin;
 
+    @NotNull
+    @Positive
     private Double ransomSum;
 
+    @NotNull
+    @Positive
     private Double deliveryPrice;
 
     private String orderDate;
@@ -32,11 +42,11 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.REMOVE, CascadeType.ALL})
     @JoinColumn(name = "from_address_id")
     private Address fromAddress;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.REMOVE, CascadeType.ALL})
     @JoinColumn(name = "to_address_id")
     private Address toAddress;
 

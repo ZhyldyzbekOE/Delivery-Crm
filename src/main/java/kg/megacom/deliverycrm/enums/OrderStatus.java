@@ -2,8 +2,8 @@ package kg.megacom.deliverycrm.enums;
 
 public enum OrderStatus {
 
-    COMPLETED,
     IN_PROCESS,
+    COMPLETED,
     IN_WAITING,
     CANCELED
 

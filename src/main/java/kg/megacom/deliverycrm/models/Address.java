@@ -1,6 +1,8 @@
 package kg.megacom.deliverycrm.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Address {

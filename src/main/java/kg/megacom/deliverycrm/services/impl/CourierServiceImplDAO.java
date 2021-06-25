@@ -41,7 +41,7 @@ public class CourierServiceImplDAO implements CourierService {
     }
 
     @Override
-    public void updateStatus(String name, String fio) {
+    public void updateStatusOnMyWay(String name, String fio) {
         Courier courier = courierRepository.findByFirstNameAndLastName(name, fio);
         courier.setCourierStatus(CouriersStatus.OnMyWay);
         courierRepository.save(courier);

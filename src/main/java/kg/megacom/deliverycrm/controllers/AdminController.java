@@ -73,7 +73,6 @@ public class AdminController {
 
     @GetMapping("/editAdmin/{id}/edit")
     public String edit(@PathVariable("id") Long id, Model model){
-        System.out.println(adminService.getAdminByIdForEdit(id));
         model.addAttribute("admin", adminService.getAdminByIdForEdit(id));
         return "updateAdminTestPage";
     }

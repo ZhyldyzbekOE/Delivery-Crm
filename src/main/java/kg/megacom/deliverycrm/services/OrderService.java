@@ -15,4 +15,6 @@ public interface OrderService {
     void updateOldOrderById(Long id, Order order);
 
     void deleteOrder(Long id);
+
+    void changeOrderStatusOnWaiting(Order order);
 }

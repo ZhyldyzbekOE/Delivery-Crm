@@ -24,7 +24,6 @@ public class CourierController {
     public String getCourierTable(Model model){
         model.addAttribute("couriers", courierService.getAllCouriers());
         model.addAttribute("newCourier", new Courier());
-        System.out.println(courierService.getAllCouriers());
         return "couriersTable";
     }
 
@@ -36,7 +35,6 @@ public class CourierController {
 
     @PostMapping("/createCourier")
     public String newCourier(@ModelAttribute("courierNew") @Valid Courier courier, BindingResult bindingResult){
-
         if (bindingResult.hasErrors()){
             return "createNewCourier";
         }
@@ -53,7 +51,6 @@ public class CourierController {
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, Model model){
-        System.out.println(courierService.getCourierByIdForEdit(id));
         model.addAttribute("courier", courierService.getCourierByIdForEdit(id));
         return "updateCourier";
     }

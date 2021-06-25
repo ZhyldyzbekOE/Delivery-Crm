@@ -11,32 +11,62 @@
 
           <label for="orderName" style="color : black">Введите название заказа: </label>
           <input type="text"  th:field="*{orderName}" id="orderName"/>
+          <div style="color:red" th:if="${#fields.hasErrors('orderName')}" th:errors="*{orderName}">orderName error</div>
+
+
+          <br/>
+          <br/>
 
           <label for="ransomSum" style="color : black">Введите цену выкупа: </label>
           <input type="text"  th:field="*{ransomSum}" id="ransomSum"/>
+          <div style="color:red" th:if="${#fields.hasErrors('ransomSum')}" th:errors="*{ransomSum}">ransomSum error</div>
+
+
+          <br/>
+          <br/>
 
           <label for="deliveryPrice" style="color : black">Введите цену доставки: </label>
           <input type="text"  th:field="*{deliveryPrice}" id="deliveryPrice"/>
+          <div style="color:red" th:if="${#fields.hasErrors('deliveryPrice')}" th:errors="*{deliveryPrice}">deliveryPrice error</div>
 
-          <select class="form-control" id="orderStatus" th:field="*{orderStatus}">
+
+          <br/>
+          <br/>
+
+          <label for="orderStatus">Выберите статус заказа</label><select class="form-control" id="orderStatus" th:field="*{orderStatus}">
               <option th:each="orderStatus : ${T(kg.megacom.deliverycrm.enums.OrderStatus).values()}"
                       th:value="${orderStatus}"
                       th:text="${orderStatus}"></option>
           </select>
 
+          <br/>
+          <br/>
+
           <label for="fromAddress" style="color : black">Введите адрес отправки: </label>
           <input type="text"  th:field="*{fromAddress.address}" id="fromAddress"/>
+
+          <br/>
+          <br/>
 
           <label for="fromAddress.phone" style="color : black">Введите номер откуда: </label>
           <input type="text"  th:field="*{fromAddress.phone}" id="fromAddress.phone"/>
 
+          <br/>
+          <br/>
+
           <label for="toAddress" style="color : black">Введите адрес доставки: </label>
           <input type="text"  th:field="*{toAddress.address}" id="toAddress"/>
+
+          <br/>
+          <br/>
 
           <label for="toAddress.phone" style="color : black">Введите номер куда: </label>
           <input type="text"  th:field="*{toAddress.phone}" id="toAddress.phone"/>
 
-          <label for="courier"></label><select class="form-control" id="courier" th:field="*{courier}">
+          <br/>
+          <br/>
+
+          <label for="courier">Выберите курьера</label><select class="form-control" id="courier" th:field="*{courier}">
               <option th:each="courier : ${couriers}"
                       th:value="${courier.id}"
                       th:text="${courier.getFirstName()}">
@@ -44,11 +74,17 @@
               </option>
           </select>
 
-          <select class="form-control" id="admin" th:field="*{admin}">
+          <br/>
+          <br/>
+
+          <label for="admin">Выберите администратора</label><select class="form-control" id="admin" th:field="*{admin}">
               <option th:each="admin : ${admins}"
                       th:value="${admin.id}"
                       th:text="${admin.getFirstName()}"></option>
           </select>
+
+          <br/>
+          <br/>
 
           <button type="submit" class="btn btn-info" style="color: white; font-size: 20px;">Сохранить</button>
 
